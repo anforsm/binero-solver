@@ -184,7 +184,11 @@ const solveGameR = (gameState: number[], row: number, col: number, val: number):
 const solveGame = (gameState: number[]): [boolean, number[]] => {
   let currGameState = [...gameState];
 
-  return solveGameR(currGameState, 0, 0, 0);
+  let start = getEmptyCell(currGameState);
+  let sol = solveGameR(currGameState, start[0], start[1], 0);
+  if (sol[0])
+    return sol
+  return solveGameR(currGameState, start[0], start[1], 1);
 }
 
 let localState = localStorage.getItem("state")
